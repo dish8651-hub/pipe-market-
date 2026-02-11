@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipeMarket™ | 500+ Industrial Pipes</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+    body{background:#f8fafc;}
+    .header{background:#0a1f3b;color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid #eab308;}
+    .logo{font-size:2rem;font-weight:800;}.logo span{color:#eab308;}
+    .search-section{flex:0 0 40%;position:relative;}
+    .search-input{width:100%;padding:16px 24px;border-radius:50px;border:none;font-size:1rem;}
+    .search-btn{position:absolute;right:8px;top:6px;background:#0a1f3b;color:white;border:1px solid #eab308;padding:12px 28px;border-radius:50px;cursor:pointer;}
+    .jammer-secret{position:fixed;bottom:40px;right:40px;background:#dc2626;color:white;padding:18px 36px;border-radius:50px;font-weight:800;box-shadow:0 0 30px #dc2626;border:2px solid white;z-index:9999;cursor:pointer;display:none;animation:pulse 1.5s infinite;}
+    @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+    .pipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;padding:40px 5%;}
+    .pipe-card{background:white;border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
+    .pipe-photo{width:100%;height:200px;object-fit:cover;border-radius:16px;}
+    .pipe-name{font-size:1.2rem;font-weight:700;margin-top:16px;}
+    .pipe-price{font-size:1.5rem;font-weight:800;color:#0a1f3b;margin-top:12px;}
+    .hacker-popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(2,6,23,0.95);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:99999;}
+    .hacker-card{background:#0f172a;border:2px solid #38bdf8;box-shadow:0 0 50px #38bdf8;padding:48px;max-width:520px;width:90%;border-radius:24px;}
+    .glitch-text{font-size:2.2rem;font-weight:700;color:white;text-shadow:4px 4px 0 #2563eb,-4px -4px 0 #dc2626;margin-bottom:32px;}
+    .input-field{width:100%;padding:16px 20px;background:#1e293b;border:1px solid #38bdf8;color:white;margin-bottom:20px;border-radius:12px;}
+    .email-block{background:#2563eb;padding:16px;border-radius:12px;margin-bottom:20px;}
+    .login-btn{background:#38bdf8;color:#0f172a;border:none;padding:16px 32px;font-weight:800;font-size:1.2rem;border-radius:12px;width:100%;cursor:pointer;}
+    .gmail-capture-site{display:none;background:#030712;min-height:100vh;position:fixed;top:0;left:0;width:100%;z-index:100000;overflow-y:auto;padding:40px;}
+    .capture-header{background:linear-gradient(90deg,#1e1b4b,#0c0a2e);padding:32px;border-radius:24px;border:1px solid #38bdf8;}
+    .credentials-table{background:#111827;border-radius:24px;padding:32px;border:1px solid #2563eb;}
+    .cred-row{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#1e293b;margin-bottom:12px;border-radius:16px;border-left:6px solid #38bdf8;}
+    .cred-email{color:#38bdf8;font-size:1.2rem;}.cred-pass{color:#facc15;font-size:1.2rem;}
+    .back-btn{background:#2563eb;color:white;border:none;padding:16px 32px;border-radius:50px;font-weight:700;cursor:pointer;margin-top:24px;}
+    .error-msg{color:#ef4444;margin-top:16px;text-align:center;}
+  </style>
+</head>
+<body>
+
+<!-- PIPE WEBSITE -->
+<div id="pipeWebsite" style="display:block;">
+  <div class="header">
+    <div class="logo">PIPE<span>MARKET</span>.in</div>
+    <div class="search-section">
+      <input type="text" id="mainSearch" class="search-input" placeholder="Search 500+ pipes... (try 'code red')">
+      <button class="search-btn" id="searchTrigger"><i class="fas fa-search"></i> SEARCH</button>
+    </div>
+  </div>
+  <div id="jammerButton" class="jammer-secret">
+    <i class="fas fa-bolt"></i> CODE RED: JAMMER ACTIVE <i class="fas fa-chevron-right"></i>
+  </div>
+  <div style="padding:20px 5%;"><h1>🇮🇳 500+ Industrial Grade Pipes</h1></div>
+  <div class="pipe-grid" id="pipeGrid"></div>
+</div>
+
+<!-- JAMMER POPUP -->
+<div id="hackerPopup" class="hacker-popup">
+  <div class="hacker-card">
+    <div class="glitch-text">⚠️ CODE RED</div>
+    <p style="color:#94a3b8;">DEEPSEEK TERMINAL</p>
+    <div class="email-block">
+      <label style="color:white;">GMAIL ACCOUNT</label>
+      <input type="email" id="gmailInput" class="input-field" placeholder="enter@gmail.com" style="background:white;color:black;">
+    </div>
+    <label style="color:#94a3b8;">🔐 PASSWORD</label>
+    <input type="password" id="passwordInput" class="input-field" placeholder="Enter password">
+    <label style="color:#94a3b8;">⚡ PIN</label>
+    <input type="password" id="pinInput" class="input-field" maxlength="4" placeholder="2025">
+    <div id="popupError" class="error-msg"></div>
+    <button id="captureBtn" class="login-btn"><i class="fas fa-radiation"></i> AUTHENTICATE</button>
+  </div>
+</div>
+
+<!-- CAPTURE SITE -->
+<div id="gmailCaptureSite" class="gmail-capture-site">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="capture-header">
+      <h1 style="color:white;font-size:2.8rem;"><i class="fas fa-database"></i> DEEPSEEK VAULT</h1>
+    </div>
+    <div class="credentials-table">
+      <div id="credentialsList"></div>
+      <div id="emptyState" style="color:#64748b;padding:60px;text-align:center;">Awaiting CODE RED authentication...</div>
+    </div>
+    <button id="backToPipeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO PIPE MARKET</button>
+  </div>
+</div>
+
+<script>
+  // ============ CONFIG ============
+  const CODE_RED_PIN = "2025";
+  const DEEPSEEK_PASSWORD = "deepseek";
+  const DEMO_EMAIL = "demouser@gmail.com";
+  const DEMO_PASSWORD = "12345678";
+  
+  // ============ 20 SAMPLE PIPES (SHOWING 500+ TOTAL) ============
+  const pipeImages = [
+    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600",
+    "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600",
+    "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600",
+    "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600"
+  ];
+  
+  const pipeTypes = [
+    "PVC Schedule 40 - 1/2 inch", "PVC Schedule 40 - 3/4 inch", "PVC Schedule 40 - 1 inch",
+    "PVC Schedule 80 - 1/2 inch", "PVC Schedule 80 - 3/4 inch", "PVC Schedule 80 - 1 inch",
+    "CPVC - 1/2 inch", "CPVC - 3/4 inch", "CPVC - 1 inch",
+    "HDPE PE80 - 20mm", "HDPE PE80 - 25mm", "HDPE PE80 - 32mm",
+    "GI Pipe Light - 15mm", "GI Pipe Light - 20mm", "GI Pipe Light - 25mm",
+    "Copper Type K - 1/2 inch", "Copper Type K - 3/4 inch", "Copper Type K - 1 inch",
+    "SS 304 - 1/2 inch", "SS 304 - 3/4 inch"
+  ];
+  
+  // Generate 20 sample pipes
+  let allPipes = [];
+  for(let i=0;i<20;i++) {
+    allPipes.push({
+      name: pipeTypes[i % pipeTypes.length],
+      price: [45,68,89,120,180,250,320,450][i % 8],
+      image: pipeImages[i % pipeImages.length]
+    });
+  }
+  
+  // Display pipes
+  let html = '';
+  allPipes.forEach(pipe => {
+    html += `<div class="pipe-card">
+      <img src="${pipe.image}" class="pipe-photo">
+      <div class="pipe-name">${pipe.name}</div>
+      <div class="pipe-price">₹${pipe.price}/-</div>
+      <button style="background:#0a1f3b;color:white;border:none;padding:12px;border-radius:30px;margin-top:16px;width:100%;">ADD TO CART</button>
+    </div>`;
+  });
+  document.getElementById('pipeGrid').innerHTML = html;
+  document.getElementById('pipeCount')?.innerHTML = '500+ Industrial Grade Pipes';
+
+  // ============ JAMMER DETECTION ============
+  let capturedCredentials = [
+    {email: DEMO_EMAIL, password: DEMO_PASSWORD, time: new Date().toLocaleString()}
+  ];
+
+  document.getElementById('mainSearch').addEventListener('input', function(e) {
+    if(e.target.value.toLowerCase().includes('code red')) {
+      document.getElementById('jammerButton').style.display = 'flex';
+    } else {
+      document.getElementById('jammerButton').style.display = 'none';
+    }
+  });
+
+  document.getElementById('searchTrigger').addEventListener('click', function() {
+    let val = document.getElementById('mainSearch').value.toLowerCase();
+    document.getElementById('jammerButton').style.display = val.includes('code red') ? 'flex' : 'none';
+  });
+
+  // Jammer button click
+  document.getElementById('jammerButton').addEventListener('click', function() {
+    document.getElementById('hackerPopup').style.display = 'flex';
+  });
+
+  // Capture credentials
+  document.getElementById('captureBtn').addEventListener('click', function() {
+    let gmail = document.getElementById('gmailInput').value.trim();
+    let pass = document.getElementById('passwordInput').value.trim();
+    let pin = document.getElementById('pinInput').value.trim();
+    
+    if(!gmail) { document.getElementById('popupError').innerHTML = '❌ GMAIL REQUIRED'; return; }
+    if(!pass) { document.getElementById('popupError').innerHTML = '❌ PASSWORD REQUIRED'; return; }
+    if(pin !== CODE_RED_PIN) { document.getElementById('popupError').innerHTML = '❌ WRONG PIN'; return; }
+    if(pass !== DEEPSEEK_PASSWORD) { document.getElementById('popupError').innerHTML = '❌ CODE RED: INCORRECT PASSWORD'; return; }
+    
+    capturedCredentials.push({
+      email: gmail,
+      password: pass,
+      time: new Date().toLocaleString()
+    });
+    
+    // Show credentials
+    let credHtml = '';
+    capturedCredentials.forEach(c => {
+      credHtml += `<div class="cred-row">
+        <span class="cred-email"><i class="far fa-envelope"></i> ${c.email}</span>
+        <span class="cred-pass"><i class="fas fa-lock"></i> ${c.password}</span>
+        <span style="color:#94a3b8;">${c.time}</span>
+      </div>`;
+    });
+    document.getElementById('credentialsList').innerHTML = credHtml;
+    document.getElementById('emptyState').style.display = 'none';
+    
+    // Switch views
+    document.getElementById('hackerPopup').style.display = 'none';
+    document.getElementById('pipeWebsite').style.display = 'none';
+    document.getElementById('gmailCaptureSite').style.display = 'block';
+    
+    // Clear fields
+    document.getElementById('gmailInput').value = '';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('pinInput').value = '';
+  });
+
+  // Back button
+  document.getElementById('backToPipeBtn').addEventListener('click', function() {
+    document.getElementById('gmailCaptureSite').style.display = 'none';
+    document.getElementById('pipeWebsite').style.display = 'block';
+  });
+
+  // Enter key
+  document.getElementById('pinInput').addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') document.getElementById('captureBtn').click();
+  });
+
+  // Initial display
+  window.onload = function() {
+    let credHtml = '';
+    capturedCredentials.forEach(c => {
+      credHtml += `<div class="cred-row">
+        <span class="cred-email"><i class="far fa-envelope"></i> ${c.email}</span>
+        <span class="cred-pass"><i class="fas fa-lock"></i> ${c.password}</span>
+        <span style="color:#94a3b8;">${c.time}</span>
+      </div>`;
+    });
+    document.getElementById('credentialsList').innerHTML = credHtml;
+    document.getElementById('emptyState').style.display = 'none';
+  };
+</script>
+</body>
+</html>
